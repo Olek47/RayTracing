@@ -16,9 +16,33 @@ struct adl_serializer<glm::vec3>
 
     static void from_json(const json& j, glm::vec3& vec)
     {
-        vec.x = j.at(0).get<float>();
-        vec.y = j.at(1).get<float>();
-        vec.z = j.at(2).get<float>();
+        if (j.is_array())
+        {
+            vec.x = j.at(0).get<float>();
+            vec.y = j.at(1).get<float>();
+            vec.z = j.at(2).get<float>();
+        }
+        else if (j.is_string())
+        {
+            std::string hexStr = j.get<std::string>();
+            if (hexStr.starts_with("#"))
+                hexStr = hexStr.substr(1);
+
+            if (hexStr.length() == 3)
+                hexStr += hexStr;
+            else if (hexStr.length() != 6)
+                throw std::invalid_argument("Unsupported color format!");
+
+            uint32_t hex = std::stoul(hexStr, nullptr, 16);
+            vec.r = (hex >> 16) & 0xFF;
+            vec.g = (hex >> 8) & 0xFF;
+            vec.b = hex & 0xFF;
+            vec /= 256.0f;
+        }
+        else
+        {
+            vec = glm::vec3(j.get<float>());
+        }
     }
 };
 NLOHMANN_JSON_NAMESPACE_END
