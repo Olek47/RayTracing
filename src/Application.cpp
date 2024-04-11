@@ -227,7 +227,7 @@ glm::vec3 Application::RayGen(uint32_t x, uint32_t y, const std::vector<glm::vec
     {
         HitPayload payload = ray.Trace(m_Scene);
         if (payload.HitDistance < 0) {
-            light += m_Scene->SkyColor * throughput;
+            light += m_Scene->GetSkyLight() * throughput;
             break;
         }
 

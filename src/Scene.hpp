@@ -12,7 +12,6 @@ struct Material
 
     glm::vec3 EmissionColor{0.0f};
     float EmissionPower = 0.0f;
-
     glm::vec3 GetEmission() const { return EmissionColor * EmissionPower; }
 };
 
@@ -30,6 +29,9 @@ struct Scene
     float CameraVFOV;
 
     glm::vec3 SkyColor;
+    float SkyIntensity = 1.0f;
+    glm::vec3 GetSkyLight() const { return SkyColor * SkyIntensity; }
+
     std::vector<Sphere> Spheres;
     std::vector<Material> Materials;
     

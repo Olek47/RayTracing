@@ -49,7 +49,7 @@ NLOHMANN_JSON_NAMESPACE_END
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE_WITH_DEFAULT(Sphere, Position, Radius, MatIndex);
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE_WITH_DEFAULT(Material, Albedo, Roughness, EmissionColor, EmissionPower);
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Scene, CameraPos, CameraLookAt, CameraVFOV, SkyColor, Spheres, Materials, EnableToneMapping);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Scene, CameraPos, CameraLookAt, CameraVFOV, SkyColor, SkyIntensity, Spheres, Materials, EnableToneMapping);
 
 Scene SceneFromFile(const std::string& path)
 {
