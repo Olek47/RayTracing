@@ -141,12 +141,10 @@ void Application::BuildSamples()
     }
 
     // Show render progress
-    std::cout << "\x1b[H\x1b[J\x1b[0m";
+    std::cout << m_Settings.Width << "x" << m_Settings.Height << " "<< m_Settings.Samples << " samples " << memUsage << "MiB required\n";
     bool done = false;
     while (!done)
     {
-        std::cout << "\x1b[H";
-        std::cout << m_Settings.Width << "x" << m_Settings.Height << " "<< m_Settings.Samples << " samples " << memUsage << "MiB required\n";
         done = true;
         for (uint32_t i = 0; i < m_Settings.ThreadCount; i++)
         {
@@ -165,8 +163,10 @@ void Application::BuildSamples()
                 << completedSamples << "/" << sampleCount << "\n";
             
         }
+        std::cout << "\x1b[" << m_Settings.ThreadCount << "F";
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
+    std::cout << "\x1b[" << m_Settings.ThreadCount << "E";
 
     // Merge all thread results into one single image
     std::vector<glm::vec3>& rawImage = m_Image->GetRawArr();
