@@ -238,9 +238,9 @@ glm::vec3 Application::RayGen(uint32_t x, uint32_t y, const std::vector<glm::vec
         throughput *= material.Albedo;
 
         ray.SetOrigin(payload.HitPosition + payload.WorldNormal * 0.0001f);
-        ray.ReflectWithOffset(payload.WorldNormal, material.Roughness * Random::UnitSphere());
-        if (!ray.IsOnHemisphere(payload.WorldNormal))
-            ray.FlipDirection();
+        glm::vec3 diffuse = glm::normalize(payload.WorldNormal + Random::UnitSphere());
+        glm::vec3 specular = glm::reflect(ray.GetDirection(), payload.WorldNormal);
+        ray.SetDirection(glm::mix(specular, diffuse, material.Roughness));
     }
 
     return light;
