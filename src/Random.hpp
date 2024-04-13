@@ -40,11 +40,11 @@ namespace Random
         // return glm::normalize(glm::vec3(Float(-1.0f, 1.0f), Float(-1.0f, 1.0f), Float(-1.0f, 1.0f)));
 
         float theta = Float(0.0f, glm::two_pi<float>());
-		float phi = std::acos(Float(-1.0f, 1.0f));
+        float phi = std::acos(Float(-1.0f, 1.0f));
 
-		float x = std::sin(phi) * std::cos(theta);
-		float y = std::sin(phi) * std::sin(theta);
-		float z = std::cos(phi);
+        float x = std::sin(phi) * std::cos(theta);
+        float y = std::sin(phi) * std::sin(theta);
+        float z = std::cos(phi);
 
         return glm::vec3(x, y, z);
     }
