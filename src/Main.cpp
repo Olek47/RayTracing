@@ -3,9 +3,11 @@
 
 #include <iostream>
 
-std::string_view GetOption(const std::vector<std::string_view>& args,
-    const std::string_view& option,
-    const std::string_view& shortOption)
+std::string_view GetOption(
+    const std::vector<std::string_view>& args,
+    std::string_view option,
+    std::string_view shortOption
+)
 {
     for (auto it = args.begin(), end = args.end(); it != end; it++)
         if ((*it == option || *it == shortOption) && it + 1 != end)
