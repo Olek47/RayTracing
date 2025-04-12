@@ -18,8 +18,12 @@ add_executable(RayTracing src/Main.cpp src/Application.cpp src/Image.cpp src/Ran
 if(MSVC)
     # TODO
 else()
-    target_compile_options(RayTracing PRIVATE -Wall -Wextra -Wno-missing-field-initializers)
+    target_compile_options(RayTracing PRIVATE -Wall -Wextra)
 endif()
+
+# STB
+add_subdirectory(external/stb)
+target_link_libraries(RayTracing stb)
 
 # GLM
 find_package(glm REQUIRED)
@@ -28,6 +32,3 @@ target_link_libraries(RayTracing glm::glm)
 # JSON for Modern C++
 find_package(nlohmann_json REQUIRED)
 target_link_libraries(RayTracing nlohmann_json::nlohmann_json)
-
-# Add external header only libraries
-target_include_directories(RayTracing PRIVATE include)
